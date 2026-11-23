@@ -51,7 +51,7 @@ function run(p,inp){
    case 52:if(csp<1){exit=8;done=true;break}pc=cs[--csp];break;
    case 64:if(sp<1){exit=2;done=true;break}a=st[--sp];if(a<0||a>255){exit=6;done=true;break}st[sp++]=mem[a];pc++;break;
    case 65:if(sp<2){exit=2;done=true;break}a=st[--sp];b=st[--sp];if(a<0||a>255){exit=6;done=true;break}mem[a]=b;pc++;break;
-   case 80:if(sp<1){exit=2;done=true;break}a=st[--sp];if(olen>=OLIM){exit=11;done=true;break}if(a<0){if(olen+1>OLIM){exit=11;done=true;break}if(olen>=out.length)grow();out[olen++]=45;a=-a}{const t=new Uint8Array(12);let n=0;do{t[n++]=(a%10)+48;a=Math.floor(a/10)}while(a>0);if(olen+n>OLIM){exit=11;done=true;break}while(n>0){if(olen>=out.length)grow();out[olen++]=t[--n]}}pc++;break;
+   case 80:if(sp<1){exit=2;done=true;break}a=st[--sp];{const t=new Uint8Array(12);let n=0,x=a<0?-a:a;do{t[n++]=(x%10)+48;x=Math.floor(x/10)}while(x>0);if(olen+n+(a<0?1:0)>OLIM){exit=11;done=true;break}if(a<0){if(olen>=out.length)grow();out[olen++]=45}while(n>0){if(olen>=out.length)grow();out[olen++]=t[--n]}}pc++;break;
    case 81:if(sp<1){exit=2;done=true;break}a=st[--sp];if(olen>=OLIM){exit=11;done=true;break}if(olen>=out.length)grow();out[olen++]=a&255;pc++;break;
    case 82:if(sp>=256){exit=3;done=true;break}st[sp++]=ip<inlen?inp[ip++]:-1;pc++;break;
    case 83:if(sp<1){exit=2;done=true;break}exit=st[--sp]&255;done=true;break;
